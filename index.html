@@ -9,6 +9,7 @@
   <meta property="og:description" content="City claims over private irrigation shares; ~1,700 households impacted. Learn the facts and how to help." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#000000" />
+
   <style>
     :root{
       --bg:#fff;
@@ -16,11 +17,11 @@
       --muted:#555;
       --card:#f6f6f6;
       --border:#e5e5e5;
-      --accent:#111;
+      --accent:#111; /* black & white */
       --radius:16px;
     }
     *{box-sizing:border-box}
-    body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial}
     a{color:var(--accent);text-decoration:underline}
     .container{max-width:900px;margin:0 auto;padding:24px}
     header{padding:16px 0 8px}
@@ -42,108 +43,4 @@
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     .sms-block{white-space:pre-wrap}
     footer{margin:28px 0;color:var(--muted);font-size:14px}
-    img{max-width:100%;border-radius:12px;margin:12px 0}
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Grantsville Irrigation — Community Update</h1>
-      <p class="tagline">City claim over private irrigation shares is an overreach impacting residents today — and potentially everyone tomorrow.</p>
-    </header>
-
-    <!-- Image placeholder -->
-    <img src="images/banner.jpg" alt="Community meeting banner" />
-
-    <div class="grid">
-      <section class="card">
-        <h2>What’s happening</h2>
-        <p>
-          Grantsville City is asserting ownership of private irrigation shares and requiring “shares or fees in lieu” for a service it does not provide. About <strong>1,700 households</strong> have already been notified, with many more likely affected if this continues.
-        </p>
-        <h3>Key points</h3>
-        <ul>
-          <li>City is claiming ownership of <strong>private irrigation shares</strong> historically held by residents.</li>
-          <li>Demanding “<strong>shares or fees in lieu</strong>” for a service the City <strong>does not provide</strong>.</li>
-          <li><strong>~1,700 households</strong> notified; thousands more could be impacted.</li>
-          <li>Erodes <strong>property rights</strong> and <strong>property value</strong>.</li>
-          <li>Sets a precedent for further government overreach citywide.</li>
-          <li>City uses taxpayer resources; residents must self-fund their defense.</li>
-        </ul>
-        <div class="btnrow">
-          <a class="btn" href="#take-action">How to help</a>
-          <button id="copyBulletBtn">Copy bullets for SMS</button>
-          <button id="shareBtn">Share this page</button>
-        </div>
-      </section>
-
-      <aside class="card">
-        <h2>30-second script</h2>
-        <p class="muted small">Read this to neighbors or paste into a text:</p>
-        <div class="sms-block mono" id="script">
-Grantsville City is claiming ownership of private irrigation shares and forcing “shares or fees in lieu” for a service it doesn’t provide. ~1,700 households are already affected. This strips property rights and value and sets a dangerous precedent. We need voices, awareness, and funds to push back—please help today.
-        </div>
-        <div class="btnrow">
-          <button id="copyScriptBtn">Copy 30-second script</button>
-          <a class="btn" id="smsLink" href="#">Open in SMS</a>
-        </div>
-      </aside>
-    </div>
-
-    <section class="card" id="take-action" style="margin-top:16px">
-      <h2>How you can help</h2>
-      <ul>
-        <li><strong>Spread the word:</strong> Copy the bullets or script above and text three neighbors today.</li>
-        <li><strong>Show up & speak up:</strong> Attend council meetings and make public comment.</li>
-        <li><strong>Contribute:</strong> Legal defense and outreach cost money. <a href="https://gofund.me/dc8c83e19" target="_blank" rel="noopener">Donate here</a>.</li>
-        <li><strong>Document:</strong> Save letters/emails from the City and note dates, names, and any costs or impacts.</li>
-        <li><strong>Stay informed:</strong> Bookmark this page for updates.</li>
-      </ul>
-      <div class="btnrow">
-        <a class="btn" href="https://gofund.me/dc8c83e19" target="_blank" rel="noopener">💵 Contribute on GoFundMe</a>
-      </div>
-    </section>
-
-    <!-- Image placeholder -->
-    <img src="images/Banner.jpg" alt="Community banner">
-...
-<img src="images/DvG.jpg" alt="Neighbors organizing">
-
-
-    <footer>
-      <div class="muted">Last updated: October 2, 2025</div>
-    </footer>
-  </div>
-
-<script>
-  const bullets = `- Grantsville City is claiming ownership of private irrigation shares
-- Demanding “shares or fees in lieu” for a service it does not provide
-- ~1,700 households notified; thousands more could be impacted
-- Strips property rights and property value
-- Sets a precedent for further government overreach
-- City uses taxpayer funds to fight residents, who must self-fund
-- Community support needed: funds, voices, awareness`;
-
-  document.getElementById('copyBulletBtn').onclick = () => {
-    navigator.clipboard.writeText(bullets);
-    alert("Bullet list copied to clipboard!");
-  };
-
-  document.getElementById('copyScriptBtn').onclick = () => {
-    const script = document.getElementById('script').innerText;
-    navigator.clipboard.writeText(script);
-    alert("30-second script copied to clipboard!");
-  };
-
-  document.getElementById('shareBtn').onclick = async () => {
-    if (navigator.share) {
-      await navigator.share({title:"Grantsville Irrigation — Community Update",url:window.location.href});
-    } else {
-      alert("Sharing not supported on this device. Copy the link instead.");
-    }
-  };
-
-  document.getElementById('smsLink').href = "sms:?&body=" + encodeURIComponent(document.getElementById('script').innerText);
-</script>
-</body>
-</html>
+    img{max-width:100%;border-radius:12px;margin:12px 0;display:bloc
