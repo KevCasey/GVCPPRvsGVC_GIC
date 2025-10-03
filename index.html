@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Grantsville Community Action</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #111; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
     header { background: #333; color: #fff; padding: 1rem; text-align: center; }
     main { padding: 1.5rem; max-width: 800px; margin: auto; }
     h1, h2, h3 { margin-top: 1.2rem; }
     .update { margin: 1.5rem 0; padding: 1rem 0; border-top: 1px solid #ccc; }
     .financial-summary { width: 100%; border-collapse: collapse; margin: 0.75rem 0; }
-    .financial-summary th, .financial-summary td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; vertical-align: top; }
+    .financial-summary th, .financial-summary td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
     .financial-summary thead th { background: #f6f6f6; }
     .editable { background: #f1f1f1; padding: 0.05rem 0.25rem; border-radius: 4px; outline: none; }
-    .muted { color: #555; }
+    .muted { color: #555; font-size: 0.85em; }
+    #last-updated { margin-top: 0.5rem; font-size: 0.85em; color: #444; }
     footer { background: #f4f4f4; padding: 1rem; text-align: center; margin-top: 2rem; }
   </style>
 </head>
@@ -34,7 +34,7 @@
     <section>
       <h2>Updates / News</h2>
 
-      <!-- Oct 4 Community Meeting (kept as-is) -->
+      <!-- Oct 4 Community Meeting -->
       <article class="update">
         <h3>Open Community Meeting — Oct 4, 2025</h3>
         <p>
@@ -44,7 +44,7 @@
         </p>
       </article>
 
-      <!-- Financial Status Update with Auto Totals -->
+      <!-- Financial Status Update -->
       <article class="update" aria-labelledby="fin-status">
         <h3 id="fin-status">Financial Status Update — Oct 3, 2025</h3>
         <p>Thank you to everyone contributing to the effort. Here’s where the war chest stands today:</p>
@@ -60,36 +60,28 @@
             <tr>
               <td>Total Contributions to Date</td>
               <td>
-                <span id="contrib" class="editable" contenteditable="true" aria-label="Total Contributions">
-                  $8,625.00
-                </span>
+                <span id="contrib" class="editable" contenteditable="true" aria-label="Total Contributions">$8,625.00</span>
                 <div class="muted">Edit this value only</div>
               </td>
             </tr>
             <tr>
               <td>Total Expenses to Date</td>
               <td>
-                <span id="expenses" class="editable" contenteditable="true" aria-label="Total Expenses">
-                  $7,907.71
-                </span>
+                <span id="expenses" class="editable" contenteditable="true" aria-label="Total Expenses">$7,907.71</span>
                 <div class="muted">Edit this value only</div>
               </td>
             </tr>
             <tr>
               <td><strong>Balance in War Chest</strong></td>
-              <td><strong id="balance">$717.29</strong></td>
+              <td><strong id="balance">—</strong></td>
             </tr>
             <tr>
               <td>Initial Goal</td>
               <td id="goal">$20,000.00</td>
             </tr>
             <tr>
-              <td>Remaining to Goal</td>
-              <td id="remain">$19,282.71</td>
-            </tr>
-            <tr>
-              <td>Progress</td>
-              <td id="progress">43.1% of goal (net of expenses)</td>
+              <td>Remaining to Goal <span class="muted">(vs. contributions)</span></td>
+              <td id="remain">—</td>
             </tr>
           </tbody>
         </table>
@@ -100,9 +92,11 @@
           returned to contributors proportional to their contribution, <em>or</em> allocated to another
           worthy cause or action by a majority vote.
         </p>
+
+        <div id="last-updated">Last Updated: —</div>
       </article>
 
-      <!-- Oct 2 Update (kept as-is) -->
+      <!-- Oct 2 Update -->
       <article class="update">
         <h3>Update — Oct 2, 2025</h3>
         <p>
@@ -124,21 +118,22 @@
 
       function parseCurrency(str) {
         if (!str) return 0;
-        // Keep digits, minus, and dot; remove everything else
         const cleaned = (str + '').replace(/[^0-9.\-]/g, '');
         const n = parseFloat(cleaned);
         return isNaN(n) ? 0 : n;
       }
 
       function formatCurrency(n) {
-        try {
-          return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        } catch {
-          // Fallback for older browsers
-          const sign = n < 0 ? '-' : '';
-          const val = Math.abs(n).toFixed(2);
-          return sign + '$' + val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }
+        return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      }
+
+      function setUpdated() {
+        const now = new Date();
+        const stamp = now.toLocaleString('en-US', {
+          dateStyle: 'medium',
+          timeStyle: 'short'
+        });
+        $('last-updated').innerText = 'Last Updated: ' + stamp;
       }
 
       function recalc() {
@@ -147,31 +142,40 @@
         const goalVal = parseCurrency($('goal').innerText);
 
         const balance = contribVal - expenseVal;
-        const remain = Math.max(goalVal - Math.max(0, balance), 0);
-        const progress = goalVal > 0 ? Math.max(0, Math.min(1, balance / goalVal)) : 0;
+        const remainVsContrib = Math.max(goalVal - contribVal, 0);
 
         $('balance').innerText = formatCurrency(balance);
-        $('remain').innerText  = formatCurrency(remain);
-        $('progress').innerText = (progress * 100).toFixed(1) + '% of goal (net of expenses)';
-
-        // Normalize user-edited fields to currency format while preserving caret position on blur only
+        $('remain').innerText  = formatCurrency(remainVsContrib);
       }
 
-      // Recalculate on load
-      recalc();
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        recalc();
+        setUpdated();
+      });
 
-      // Recalculate on edits; format on blur
       ['contrib', 'expenses'].forEach(id => {
         const el = $(id);
-        el.addEventListener('input', recalc);
+
+        el.addEventListener('input', () => { recalc(); setUpdated(); });
+
         el.addEventListener('blur', () => {
-          const val = parseCurrency(el.innerText);
-          el.innerText = formatCurrency(val);
+          el.innerText = formatCurrency(parseCurrency(el.innerText));
           recalc();
+          setUpdated();
         });
-        // Prevent Enter from inserting new lines
+
         el.addEventListener('keydown', (e) => {
           if (e.key === 'Enter') { e.preventDefault(); el.blur(); }
+        });
+
+        el.addEventListener('paste', (e) => {
+          e.preventDefault();
+          const text = (e.clipboardData || window.clipboardData).getData('text');
+          const val = formatCurrency(parseCurrency(text));
+          document.execCommand('insertText', false, val);
+          recalc();
+          setUpdated();
         });
       });
     })();
