@@ -45,3 +45,116 @@
 </head>
 <body>
   <div class="container">
+    <header>
+      <h1>Grantsville Irrigation — Community Update</h1>
+      <p class="tagline">City claim over private irrigation shares is an overreach impacting residents today — and potentially everyone tomorrow.</p>
+    </header>
+
+    <!-- Banner image -->
+    <img src="images/Banner.jpg" alt="David vs. Goliath themed community banner" />
+
+    <div class="grid">
+      <!-- Left column -->
+      <section class="card">
+        <h2>What’s happening</h2>
+        <p>
+          Grantsville City is asserting ownership of private irrigation shares and requiring “shares or fees in lieu” for a service it does not provide. About <strong>1,700 households</strong> have already been notified, with many more likely affected if this continues.
+        </p>
+
+        <h3>Key points</h3>
+        <ul>
+          <li>City is claiming ownership of <strong>private irrigation shares</strong> historically held by residents.</li>
+          <li>Demanding “<strong>shares or fees in lieu</strong>” for a service the City <strong>does not provide</strong>.</li>
+          <li><strong>~1,700 households</strong> notified; thousands more could be impacted.</li>
+          <li>Erodes <strong>property rights</strong> and <strong>property value</strong>.</li>
+          <li>Sets a precedent for further government overreach citywide.</li>
+          <li>City uses taxpayer resources; residents must self-fund their defense.</li>
+        </ul>
+
+        <div class="btnrow">
+          <a class="btn" href="#take-action" aria-label="Jump to how to help">How to help</a>
+          <button id="copyBulletBtn" aria-label="Copy bullet list for SMS">Copy bullets for SMS</button>
+          <button id="shareBtn" aria-label="Share this page">Share this page</button>
+        </div>
+      </section>
+
+      <!-- Right column -->
+      <aside class="card" id="broadcast">
+        <h2>30-second script</h2>
+        <p class="small muted">Read this to neighbors or paste into a text:</p>
+        <div class="sms-block mono" id="script">
+Grantsville City is claiming ownership of private irrigation shares and forcing “shares or fees in lieu” for a service it doesn’t provide. ~1,700 households are already affected. This strips property rights and value and sets a dangerous precedent. We need voices, awareness, and funds to push back—please help today.
+        </div>
+        <div class="btnrow">
+          <button id="copyScriptBtn" aria-label="Copy 30-second script">Copy 30-second script</button>
+          <a class="btn" id="smsLink" href="#" aria-label="Open SMS with prefilled message">Open in SMS</a>
+        </div>
+      </aside>
+    </div>
+
+    <section class="card" id="take-action" style="margin-top:16px">
+      <h2>How you can help</h2>
+      <ul>
+        <li><strong>Spread the word:</strong> Copy the bullets or script above and text three neighbors today.</li>
+        <li><strong>Show up & speak up:</strong> Attend council meetings and make public comment.</li>
+        <li><strong>Contribute:</strong> Legal defense and outreach cost money. <a href="https://gofund.me/dc8c83e19" target="_blank" rel="noopener noreferrer">Donate here</a>.</li>
+        <li><strong>Document:</strong> Save letters/emails from the City and note dates, names, and any costs or impacts.</li>
+        <li><strong>Stay informed:</strong> Bookmark this page for updates.</li>
+      </ul>
+      <div class="btnrow">
+        <a class="btn" href="https://gofund.me/dc8c83e19" target="_blank" rel="noopener noreferrer">Contribute on GoFundMe</a>
+      </div>
+    </section>
+
+    <!-- Secondary image -->
+    <img src="images/DvG.jpg" alt="Modern David vs. Goliath illustration" />
+
+    <footer>
+      <div class="muted">Last updated: October 2, 2025</div>
+    </footer>
+  </div>
+
+  <script>
+    const bullets = `- Grantsville City is claiming ownership of private irrigation shares
+- Demanding “shares or fees in lieu” for a service it does not provide
+- ~1,700 households notified; thousands more could be impacted
+- Strips property rights and property value
+- Sets a precedent for further government overreach
+- City uses taxpayer funds to fight residents, who must self-fund
+- Community support needed: funds, voices, awareness`;
+
+    const copyBulletBtn = document.getElementById('copyBulletBtn');
+    const copyScriptBtn = document.getElementById('copyScriptBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const smsLink = document.getElementById('smsLink');
+
+    if (copyBulletBtn) {
+      copyBulletBtn.onclick = async () => {
+        try { await navigator.clipboard.writeText(bullets); alert("Bullet list copied!"); }
+        catch { alert("Copy failed. Select and copy manually."); }
+      };
+    }
+    if (copyScriptBtn) {
+      copyScriptBtn.onclick = async () => {
+        const script = document.getElementById('script').innerText.trim();
+        try { await navigator.clipboard.writeText(script); alert("Script copied!"); }
+        catch { alert("Copy failed. Select and copy manually."); }
+      };
+    }
+    if (shareBtn) {
+      shareBtn.onclick = async () => {
+        const data = { title:"Grantsville Irrigation — Community Update", url:window.location.href };
+        if (navigator.share) { try { await navigator.share(data); } catch {} }
+        else {
+          try { await navigator.clipboard.writeText(window.location.href); alert("Link copied!"); }
+          catch { alert("Sharing not supported. Copy the URL from the address bar."); }
+        }
+      };
+    }
+    if (smsLink) {
+      const scriptText = document.getElementById('script').innerText.trim();
+      smsLink.href = "sms:?&body=" + encodeURIComponent(scriptText);
+    }
+  </script>
+</body>
+</html>
