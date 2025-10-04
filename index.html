@@ -34,6 +34,11 @@
     .small{font-size:14px}
     .btn{display:inline-block;border:1px solid #111;border-radius:12px;padding:10px 14px;text-decoration:none;color:#111;background:#fff}
     .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    /* Extra breathing room between update items only */
+.update + .update {
+  margin-top: 3rem;   /* roughly double the previous spacing */
+  padding-top: 1rem;  /* keeps the top border from crowding */
+}
 
     /* Layout */
     .grid{display:block}
