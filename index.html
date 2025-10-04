@@ -32,17 +32,10 @@
 
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     .small{font-size:14px}
+    .muted{color:#555}
+
     .btn{display:inline-block;border:1px solid #111;border-radius:12px;padding:10px 14px;text-decoration:none;color:#111;background:#fff}
     .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-    /* Extra breathing room between update items only */
-.update + .update {
-  margin-top: 3rem;   /* roughly double the previous spacing */
-  padding-top: 1rem;  /* keeps the top border from crowding */
-  /* consistent space between updates */
-.update { margin-bottom: 2.75rem !important; }
-.update:last-of-type { margin-bottom: 0 !important; }
-
-}
 
     /* Layout */
     .grid{display:block}
@@ -66,6 +59,15 @@
 
     /* Updates / News section */
     .news{border-left:4px solid #111}
+
+    /* Ensure clear separation between update items */
+    .update{margin:0 0 28px 0}
+    .update + .update{margin-top:32px}
+
+    /* Financial table (minimal, b/w) */
+    table.financial-summary{width:100%;border-collapse:collapse;margin:8px 0 12px}
+    .financial-summary th,.financial-summary td{padding:6px 8px;text-align:left;border-bottom:1px solid #ddd}
+    .financial-summary thead th{font-weight:600;color:#333}
 
     /* Contact card */
     .contact p{margin:6px 0}
@@ -166,75 +168,61 @@ Grantsville City is claiming ownership of private irrigation shares and forcing 
     <section class="card news" aria-labelledby="updates-title">
       <h2 id="updates-title" style="margin-top:0">Updates / News</h2>
 
-      <!-- Newer item first -->
-      <article style="margin-bottom:14px">
-        <h3 style="margin:0 0 6px">Oct 4, 2025 — Open Community Meeting</h3>
-        <p style="margin:0">
-          Saturday, Oct 4 • <strong>Grantsville City Library (Large Meeting Room)</strong> — Updates, Q&amp;A, volunteer sign-ups, and donations. All residents welcome.
-        </p>
+      <!-- Newest first -->
+      <article class="update">
+        <h3>Oct 4, 2025 — Open Community Meeting</h3>
+        <p>Saturday, Oct 4 • <strong>Grantsville City Library (Large Meeting Room)</strong> — Updates, Q&amp;A, volunteer sign-ups, and donations. All residents welcome.</p>
       </article>
 
       <!-- Financial Status Update -->
-<article class="update" aria-labelledby="fin-status">
-  <h3 id="fin-status">Financial Status Update — Oct 3, 2025</h3>
-  <p>Thank you to everyone contributing to the effort. Here’s where the war chest stands today:</p>
+      <article class="update" aria-labelledby="fin-status">
+        <h3 id="fin-status">Financial Status Update — Oct 3, 2025</h3>
+        <p>Thank you to everyone contributing to the effort. Here’s where the war chest stands today:</p>
 
-  <table class="financial-summary" role="table" aria-label="Financial Summary">
-    <thead>
-      <tr>
-        <th scope="col">Metric</th>
-        <th scope="col">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-  <td>Total Contributions to Date</td>
-  <td>
-    <span id="contrib" contenteditable="true" aria-label="Total Contributions">$8,625.00</span>
-  </td>
-</tr>
-<tr>
-  <td>Total Expenses to Date</td>
-  <td>
-    <span id="expenses" contenteditable="true" aria-label="Total Expenses">$7,907.71</span>
-  </td>
-</tr>
+        <table class="financial-summary" role="table" aria-label="Financial Summary">
+          <thead>
+            <tr>
+              <th scope="col">Metric</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total Contributions to Date</td>
+              <td><span id="contrib" contenteditable="true" aria-label="Total Contributions">$8,625.00</span></td>
+            </tr>
+            <tr>
+              <td>Total Expenses to Date</td>
+              <td><span id="expenses" contenteditable="true" aria-label="Total Expenses">$7,907.71</span></td>
+            </tr>
+            <tr>
+              <td><strong>Balance in War Chest</strong></td>
+              <td><strong id="balance">—</strong></td>
+            </tr>
+            <tr>
+              <td>Initial Goal</td>
+              <td id="goal">$20,000.00</td>
+            </tr>
+            <tr>
+              <td>Remaining to Goal <span class="small muted">(vs. contributions)</span></td>
+              <td id="remain">—</td>
+            </tr>
+          </tbody>
+        </table>
 
-      <tr>
-        <td><strong>Balance in War Chest</strong></td>
-        <td><strong id="balance">—</strong></td>
-      </tr>
-      <tr>
-        <td>Initial Goal</td>
-        <td id="goal">$20,000.00</td>
-      </tr>
-      <tr>
-        <td>Remaining to Goal <span class="muted">(vs. contributions)</span></td>
-        <td id="remain">—</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>
-    We’re still a long way from the initial war chest goal of <strong>$20,000</strong>.
-    If, after the completion of this action, there is any positive balance, it will either be
-    returned to contributors proportional to their contribution, <em>or</em> allocated to another
-    worthy cause or action by a majority vote.
-  </p>
-
-  <div id="last-updated">Last Updated: —</div>
-</article>
-<article class="update">
-  <h3>Oct 2, 2025 — Legal counsel retained: Janet Conway</h3>
-  <p>We’ve retained Janet Conway to represent residents…</p>
-</article>
-
-      <article style="margin-bottom:10px">
-        <h3 style="margin:0 0 6px">Oct 2, 2025 — Legal counsel retained: <span class="mono">Janet Conway</span></h3>
-        <p style="margin:0">
-          We’ve retained Janet Conway to represent residents. Ms. Conway brings deep Utah experience in water rights, mutual water companies, and municipal law.
-          She strengthens our case strategy (injunctive relief, filings, negotiation) and helps ensure our actions are focused, timely, and effective.
+        <p>
+          We’re still a long way from the initial war chest goal of <strong>$20,000</strong>.
+          If, after the completion of this action, there is any positive balance, it will either be
+          returned to contributors proportional to their contribution, <em>or</em> allocated to another
+          worthy cause or action by a majority vote.
         </p>
+
+        <div id="last-updated" class="small">Last Updated: —</div>
+      </article>
+
+      <article class="update">
+        <h3>Oct 2, 2025 — Legal counsel retained: <span class="mono">Janet Conway</span></h3>
+        <p>We’ve retained Janet Conway to represent residents. Ms. Conway brings deep Utah experience in water rights, mutual water companies, and municipal law. She strengthens our case strategy (injunctive relief, filings, negotiation) and helps ensure our actions are focused, timely, and effective.</p>
       </article>
     </section>
 
@@ -260,68 +248,69 @@ Grantsville City is claiming ownership of private irrigation shares and forcing 
       <div>Last updated: October 3, 2025</div>
     </footer>
   </div>
+
+  <!-- Tiny script for financials -->
   <script>
-  (function () {
-    const $ = (id) => document.getElementById(id);
+    (function () {
+      const $ = (id) => document.getElementById(id);
 
-    function parseCurrency(str) {
-      if (!str) return 0;
-      const cleaned = String(str).replace(/[^0-9.\-]/g, '');
-      const n = parseFloat(cleaned);
-      return isNaN(n) ? 0 : n;
-    }
+      function parseCurrency(str) {
+        if (!str) return 0;
+        const cleaned = String(str).replace(/[^0-9.\\-]/g, '');
+        const n = parseFloat(cleaned);
+        return isNaN(n) ? 0 : n;
+      }
 
-    function formatCurrency(n) {
-      try { return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' }); }
-      catch { return (n < 0 ? '-' : '') + '$' + Math.abs(n).toFixed(2); }
-    }
+      function formatCurrency(n) {
+        try { return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' }); }
+        catch { return (n < 0 ? '-' : '') + '$' + Math.abs(n).toFixed(2); }
+      }
 
-    function setUpdated() {
-      const el = $('last-updated');
-      if (!el) return;
-      el.textContent = 'Last Updated: ' + new Date().toLocaleString('en-US', {
-        dateStyle: 'medium', timeStyle: 'short'
-      });
-    }
+      function setUpdated() {
+        const el = $('last-updated');
+        if (!el) return;
+        el.textContent = 'Last Updated: ' + new Date().toLocaleString('en-US', {
+          dateStyle: 'medium', timeStyle: 'short'
+        });
+      }
 
-    function recalc() {
-      const c = $('contrib'), e = $('expenses'), g = $('goal');
-      if (!c || !e || !g) return;
+      function recalc() {
+        const c = $('contrib'), e = $('expenses'), g = $('goal');
+        if (!c || !e || !g) return;
 
-      const contribVal = parseCurrency(c.textContent);
-      const expenseVal = parseCurrency(e.textContent);
-      const goalVal    = parseCurrency(g.textContent);
+        const contribVal = parseCurrency(c.textContent);
+        const expenseVal = parseCurrency(e.textContent);
+        const goalVal    = parseCurrency(g.textContent);
 
-      const balance = contribVal - expenseVal;
-      const remain  = Math.max(goalVal - contribVal, 0); // vs contributions
+        const balance = contribVal - expenseVal;
+        const remain  = Math.max(goalVal - contribVal, 0); // vs contributions
 
-      const bal = $('balance'), rem = $('remain');
-      if (bal) bal.textContent = formatCurrency(balance);
-      if (rem) rem.textContent = formatCurrency(remain);
-    }
+        const bal = $('balance'), rem = $('remain');
+        if (bal) bal.textContent = formatCurrency(balance);
+        if (rem) rem.textContent = formatCurrency(remain);
+      }
 
-    function wire(el) {
-      el.addEventListener('input', () => { recalc(); setUpdated(); });
-      el.addEventListener('blur',  () => {
-        el.textContent = formatCurrency(parseCurrency(el.textContent));
+      function wire(el) {
+        el.addEventListener('input', () => { recalc(); setUpdated(); });
+        el.addEventListener('blur',  () => {
+          el.textContent = formatCurrency(parseCurrency(el.textContent));
+          recalc(); setUpdated();
+        });
+        el.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
+        el.addEventListener('paste', (e) => {
+          e.preventDefault();
+          const text = (e.clipboardData || window.clipboardData).getData('text') || '';
+          document.execCommand('insertText', false, formatCurrency(parseCurrency(text)));
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const c = $('contrib'), e = $('expenses');
+        if (c) wire(c);
+        if (e) wire(e);
         recalc(); setUpdated();
       });
-      el.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
-      el.addEventListener('paste', (e) => {
-        e.preventDefault();
-        const text = (e.clipboardData || window.clipboardData).getData('text') || '';
-        document.execCommand('insertText', false, formatCurrency(parseCurrency(text)));
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const c = $('contrib'), e = $('expenses');
-      if (c) wire(c);
-      if (e) wire(e);
-      recalc(); setUpdated();
-    });
-  })();
-</script>
-
+    })();
+  </script>
 </body>
 </html>
