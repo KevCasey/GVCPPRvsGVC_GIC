@@ -284,22 +284,11 @@ Grantsville City is claiming ownership of private irrigation shares and forcing 
 
     <footer>
       <div>Last updated: October 3, 2025</div>
-
-      <div style="text-align:center; margin-top:10px;">
-        <a href="https://github.com/kevcasey/GVCPPRvsGVC_GIC" target="_blank" rel="noopener noreferrer">
-          <img 
-            src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://kevcasey.github.io/GVCPPRvsGVC_GIC&count_bg=%23007ACC&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Visitors&edge_flat=false" 
-            alt="" style="border:none; height:20px;" />
-        </a>
-      </div>
-
-      <div class="small" style="text-align:center; margin-top:6px;">
-        Visitors: <span id="visit-count">loading…</span>
-      </div>
+   
     </footer>
   </div>
 
-  <!-- Tiny script for financials and visitor count -->
+   <!-- Tiny script for financials -->
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -356,20 +345,7 @@ Grantsville City is claiming ownership of private irrigation shares and forcing 
         if (c) wire(c);
         recalc(); setUpdated();
       });
-
-      // Visitor counter (CountAPI) — numeric fallback even if the badge is blocked
-      fetch('https://api.countapi.xyz/hit/kevcasey.github.io/GVCPPRvsGVC_GIC')
-        .then(r => r.json())
-        .then(d => {
-          const el = document.getElementById('visit-count');
-          if (el) el.textContent = Number(d.value).toLocaleString();
-        })
-        .catch(() => {
-          const el = document.getElementById('visit-count');
-          if (el) el.textContent = '—';
-        });
     })();
   </script>
 </body>
 </html>
-
